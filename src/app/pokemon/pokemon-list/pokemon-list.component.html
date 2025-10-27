@@ -1,0 +1,48 @@
+<mat-grid-list cols="1" rowHeight="8:1">
+  <mat-grid-tile>
+      <mat-form-field appearance="outline">
+        <mat-label>Rechercher un Pokémon</mat-label>
+        <input matInput id="search" type="text" name="searchTerm" placeholder="Nom du Pokémon"
+               #searchFiel [value]="searchTerm()" (input)="searchTerm.set(searchFiel.value)" />
+      </mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>
+
+@if(loading()) {
+  <div class="d-flex justify-content-center">
+    <mat-spinner color="primary"></mat-spinner>
+  </div>
+}
+
+<mat-grid-list [cols]="cols()" rowHeight="2:1" gutterSize="1px">
+  @for(pokemon of pokemonListFiltered(); track pokemon.id) {   
+    <mat-grid-tile>
+      <mat-card class="pokemon-card" appearance="outlined" appPokemonBorder [pokemonType]="pokemon.types[0]" [routerLink]="['/pokemons', pokemon.id]">
+        <div style="display: flex;">
+          <div style="display: flex; align-items: center; justify-content: center; background: #f8f9fa; border-top-left-radius: 8px; border-bottom-left-radius: 8px; overflow: hidden; width: 120px; min-width: 120px;">
+            <img style="width: 100%; height: auto; display: block;" [src]="pokemon.picture" alt="{{ pokemon.name }}" />
+          </div>
+          <div style="flex: 1;">
+            <div class="card-body" style="padding: 16px;">
+              <h5 class="card-title" style="margin: 0;">{{ pokemon.name }}</h5>
+              <h6 class="card-subtitle" style="margin: 8px 0 0 0; color: #757575;">
+                Taille : {{ size(pokemon) }}
+              </h6>
+              <div style="margin-top: 8px; color: #757575;">
+                <p style="margin: 0;">Points de vie : {{ pokemon.life }}</p>
+                <p style="margin: 0;">Dégats : {{ pokemon.damage }}</p>
+                <p style="margin: 0;">{{ pokemon.created | date }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+  }
+</mat-grid-list>
+
+<div style="position: fixed; bottom: 24px; right: 24px;">
+  <button mat-fab color="primary" aria-label="Ajouter un Pokémon" routerLink="/pokemons/add">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

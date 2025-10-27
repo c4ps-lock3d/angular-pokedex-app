@@ -1,0 +1,71 @@
+<div style="margin-top: 2rem;">
+  @if (pokemon(); as pokemon) {
+    <mat-card>
+      <div style="display: flex; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; justify-content: center; background: #f8f9fa; border-top-left-radius: 8px; border-bottom-left-radius: 8px; overflow: hidden; width: 200px; min-width: 120px;">
+          <img style="width: 100%; height: auto; display: block;" [src]="pokemon.picture" [alt]="pokemon.name" />
+        </div>
+        <div style="flex: 1;">
+          <div style="padding: 16px;">
+            <h2 style="margin-top: 0;">{{ pokemon.name }}</h2>
+            <table mat-table>
+              <tr>
+                <th>Points de vie</th>
+                <td>{{ pokemon.life }}</td>
+              </tr>
+              <tr>
+                <th>Dégâts</th>
+                <td>{{ pokemon.damage }}</td>
+              </tr>
+              <tr>
+                <th>Types</th>
+                <td>
+                  @for(type of pokemon.types; track type) {
+                    <mat-chip color="primary" selected style="margin-right: 4px;">{{ type }}</mat-chip>
+                  }
+                </td>
+              </tr>
+              <tr>
+                <th>Date de création</th>
+                <td>{{ pokemon.created | date : "dd/MM/yyyy" }}</td>
+              </tr>
+            </table>
+            <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+              <button mat-button color="primary" routerLink="/pokemons">
+                <mat-icon>arrow_back</mat-icon> RETOUR
+              </button>
+              <button mat-button color="accent" [routerLink]="['/pokemons/edit/', pokemon.id]">
+                <mat-icon>edit</mat-icon> ÉDITER
+              </button>
+              <button mat-button color="warn" (click)="deletePokemon()">
+                <mat-icon>delete</mat-icon> SUPPRIMER
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  }
+  @if(loading()) {
+    <div style="display: flex; justify-content: center; margin: 2rem 0;">
+      <mat-spinner color="primary"></mat-spinner>
+    </div>
+  }
+  @if(error()) {
+    <div style="text-align: center; margin-top: 2rem;">
+      <mat-card>
+        <div>
+          <img
+            src="http://assets.pokemon.com/assets/cms2/img/pokedex/full/035.png"
+            style="display: block; margin: 0 auto; width: 120px;"
+            alt="Rondoudou"
+          />
+          <h2 style="margin-top: 2rem;">Hey, cette page n'existe pas !</h2>
+          <button mat-button color="primary" routerLink="/pokemons">
+            <mat-icon>arrow_back</mat-icon> RETOURNER À L'ACCUEIL
+          </button>
+        </div>
+      </mat-card>
+    </div>
+  }
+</div>

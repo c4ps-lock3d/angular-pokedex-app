@@ -1,0 +1,139 @@
+<div style="margin-top: 2rem;">
+  @if (pokemon(); as pokemon) {
+    <mat-card>
+      <div style="display: flex; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; justify-content: center; background: #f8f9fa; border-top-left-radius: 8px; border-bottom-left-radius: 8px; overflow: hidden; width: 200px; min-width: 120px;">
+          <img style="width: 100%; height: auto; display: block;" [src]="pokemon.picture" [alt]="pokemon.name" />
+        </div>
+        <div style="flex: 1;">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div style="padding: 16px;">
+              <h2 style="margin-top: 0;">{{ pokemon.name }}</h2>
+              <table style="width: 100%;">
+                <tbody>
+                  <tr>
+                    <th style="text-align: left;">Name</th>
+                    <td>
+                      <mat-form-field appearance="outline" style="width: 100%;">
+                        <input matInput formControlName="name" placeholder="Nom du Pokémon" />
+                      </mat-form-field>
+                      @if (pokemonName.hasError('required')) {
+                        <div class="invalid-feedback">
+                            Le nom du Pokémon est requis.
+                        </div>
+                      }
+                      @if (pokemonName.hasError('minlength')) {
+                        <div class="invalid-feedback">
+                            Veuillez saisir un nom plus long. (Minimum: {{ pokemonName.getError('minlength').requiredLength }})
+                        </div>
+                      }
+                      @if (pokemonName.hasError('maxlength')) {
+                        <div class="invalid-feedback">
+                            Veuillez saisir un nom plus court. (Maximum: {{ pokemonName.getError('maxlength').requiredLength }})
+                        </div>
+                      }
+                      @if (pokemonName.hasError('pattern')) {
+                        <div class="invalid-feedback">
+                            Veuillez n'utiliser que des lettres pour le nom du Pokémon.
+                        </div>
+                      }
+                    </td>
+                  </tr>
+                  <tr>
+                    <th style="text-align: left;">Points de vie</th>
+                    <td>
+                      <div style="display: flex; align-items: center;">
+                        <button mat-mini-button color="primary" type="button" [disabled]="pokemonLife.value <= POKEMON_RULES.MIN_LIFE" (click)="decrementLife()">-</button>
+                        <mat-form-field appearance="outline" style="width: 80px; margin: 0 8px;">
+                          <input matInput formControlName="life" type="number" style="text-align: center;" />
+                        </mat-form-field>
+                        <button mat-mini-button color="primary" type="button" [disabled]="pokemonLife.value >= POKEMON_RULES.MAX_LIFE" (click)="incrementLife()">+</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th style="text-align: left;">Dégâts</th>
+                    <td>
+                      <div style="display: flex; align-items: center;">
+                        <button mat-mini-button color="primary" type="button" [disabled]="pokemonDamage.value <= POKEMON_RULES.MIN_DAMAGE" (click)="decrementDamage()">-</button>
+                        <mat-form-field appearance="outline" style="width: 80px; margin: 0 8px;">
+                          <input matInput formControlName="damage" type="number" style="text-align: center;" />
+                        </mat-form-field>
+                        <button mat-mini-button color="primary" type="button" [disabled]="pokemonDamage.value >= POKEMON_RULES.MAX_DAMAGE" (click)="incrementDamage()">+</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th style="text-align: left;">Types</th>
+                    <td>
+                      <div style="margin-bottom: 8px;">
+                        @for(type of pokemonTypeList.controls; track type; let index = $index) {
+                          <mat-chip
+                            color="primary"
+                            selected
+                            (removed)="pokemonTypeList.removeAt(index)"
+                            removable="true"
+                          >
+                            {{ type.value }}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                          </mat-chip>
+                        }
+                      </div>
+                      @if (pokemonTypeList.hasError('required')) {
+                        <p style="color: red;">Veuillez séléctionner au moins un type pour un Pokémon</p>
+                      }
+                      @if (pokemonTypeList.hasError('maxlength')) {
+                        <p style="color: red;">Veuillez séléctionner au maximum {{ pokemonTypeList.getError('maxlength').requiredLength}} types pour un Pokémon</p>
+                      }
+                      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+                        @for(type of pokemonService.getPokemonTypeList(); track type) {
+                          <mat-checkbox
+                            [checked]="isPokemonTypeSelected(type)"
+                            (change)="onPokemonTypeChange(type, $event.checked)"
+                            color="primary"
+                          >
+                            {{ type }}
+                          </mat-checkbox>
+                        }
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+                <button mat-button color="primary" [routerLink]="['/pokemons', pokemon.id]">
+                  RETOUR
+                </button>
+                <button mat-raised-button color="accent" type="submit" [disabled]="form.invalid">
+                  SAUVEGARDER LES CHANGEMENTS
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </mat-card>
+  }
+  @if(loading()) {
+    <div style="display: flex; justify-content: center; margin: 2rem 0;">
+      <mat-spinner color="primary"></mat-spinner>
+    </div>
+  }
+  @if(error()) {
+    <div style="text-align: center; margin-top: 2rem;">
+      <mat-card>
+        <div>
+          <img
+            src="http://assets.pokemon.com/assets/cms2/img/pokedex/full/035.png"
+            style="display: block; margin: 0 auto; width: 120px;"
+            alt="Rondoudou"
+          />
+          <h2 style="margin-top: 2rem;">Hey, cette page n'existe pas !</h2>
+          <button mat-button color="primary" routerLink="/pokemons">
+            RETOURNER À L'ACCUEIL
+          </button>
+        </div>
+      </mat-card>
+    </div>
+  }
+</div>
