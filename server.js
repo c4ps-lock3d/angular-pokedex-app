@@ -3,6 +3,8 @@ const path = require('path');
 const app = express();
 const { MongoClient } = require('mongodb');
 const cors = require('cors');
+require('dotenv').config();
+
 
 app.use(cors());
 app.use(express.json());
