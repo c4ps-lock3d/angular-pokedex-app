@@ -10,13 +10,12 @@ import { LoginComponent } from './login/login.component';
 import { PokemonAddComponent } from './pokemon/pokemon-add/pokemon-add.component';
 import { PokemonService } from './pokemon.service';
 import { environment } from '../environments/environment';
-import { PokemonLocalStorageService } from './pokemon-local-storage.service';
-import { PokemonJSONServerService } from './pokemon-json-server.service';
+import { PokemonMongoDBService } from './pokemon-mongodb.service';
 
 export function pokemonServiceFactory(): PokemonService {
   return environment.production
-    ? new PokemonLocalStorageService()
-    : new PokemonJSONServerService();
+    ? new PokemonMongoDBService()
+    : new PokemonMongoDBService();
 }
 
 const routes: Routes = [

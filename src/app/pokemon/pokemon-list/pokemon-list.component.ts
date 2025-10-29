@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { PokemonBorderDirective } from '../../pokemon-border.directive';
 import { Pokemon } from '../../pokemon.model';
 import { PokemonService } from '../../pokemon.service';
+import { catchError, of } from 'rxjs';
 // Angular Material
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -27,8 +28,15 @@ export class PokemonListComponent {
   readonly #pokemonService = inject(PokemonService);
   
   // Conversion de l'Observable en Signal
-  readonly pokemonList = toSignal(this.#pokemonService.getPokemonList(), { initialValue: [] });
-  readonly searchTerm = signal('');
+  readonly pokemonList = toSignal(
+    this.#pokemonService.getPokemonList().pipe(
+      catchError(error => {
+        console.error('Erreur lors du chargement des pokémons:', error);
+        return of([]);
+      })
+    ),
+    { initialValue: [] }
+  );  readonly searchTerm = signal('');
 
   readonly pokemonListFiltered = computed(() => {
     const searchTerm = this.searchTerm();
