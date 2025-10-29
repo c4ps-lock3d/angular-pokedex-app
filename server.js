@@ -7,7 +7,7 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.json());
 
-const uri = 'mongodb+srv://nicolasperrenoud_db_user:xSjxRbmCjNlQCrQr@cluster0.xr6eiwi.mongodb.net/?appName=Cluster0';
+const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
 
 // Routes API (backend)
@@ -46,7 +46,7 @@ app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/angular-pokedex-app/browser/index.html'));
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
