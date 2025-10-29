@@ -20,6 +20,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   imports: [PokemonBorderDirective, DatePipe, RouterLink, MatButtonModule, MatCardModule, MatGridListModule, MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatIconModule],
   templateUrl: './pokemon-list.component.html',
   styles: `.pokemon-card {
+    margin: 8px;
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
     cursor: pointer;
   }`
 })
@@ -77,8 +80,10 @@ export class PokemonListComponent {
       this.cols.set(1);
     } else if (width < 960) {
       this.cols.set(2);
-    } else {
+    } else if (width < 1280) {
       this.cols.set(3);
+    } else {
+      this.cols.set(4);
     }
   }
 }

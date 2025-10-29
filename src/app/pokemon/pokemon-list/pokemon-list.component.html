@@ -14,7 +14,7 @@
   </div>
 }
 
-<mat-grid-list [cols]="cols()" rowHeight="2:1" gutterSize="1px">
+<mat-grid-list [cols]="cols()" rowHeight="2:1" gutterSize="0">
   @for(pokemon of pokemonListFiltered(); track pokemon.id) {   
     <mat-grid-tile>
       <mat-card class="pokemon-card" appearance="outlined" appPokemonBorder [pokemonType]="pokemon.types[0]" [routerLink]="['/pokemons', pokemon.id]">
@@ -23,7 +23,7 @@
             <img style="width: 100%; height: auto; display: block;" [src]="pokemon.picture" alt="{{ pokemon.name }}" />
           </div>
           <div style="flex: 1;">
-            <div class="card-body" style="padding: 16px;">
+            <div class="card-body" style="padding: 8px;">
               <h5 class="card-title" style="margin: 0;">{{ pokemon.name }}</h5>
               <h6 class="card-subtitle" style="margin: 8px 0 0 0; color: #757575;">
                 Taille : {{ size(pokemon) }}
