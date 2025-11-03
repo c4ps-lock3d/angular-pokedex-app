@@ -3,10 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Pokemon, PokemonList } from './pokemon.model';
 import { PokemonService } from './pokemon.service';
+import { environment } from '../environments/environment';
 
 export class PokemonMongoDBService implements PokemonService {
   private readonly http = inject(HttpClient);
-  private readonly POKEMON_API_URL = 'http://localhost:3000/api/pokemons';
+  private readonly POKEMON_API_URL = environment.apiUrl;
 
   getPokemonList(): Observable<PokemonList> {
     return this.http.get<PokemonList>(this.POKEMON_API_URL);

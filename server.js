@@ -40,7 +40,7 @@ app.get('/api/pokemons/:id', async (req, res) => {
   }
 });
 
-// Servir les fichiers statiques Angular depuis dist/ton-app/browser
+// Servir les fichiers statiques Angular depuis le dossier 'dist'
 app.use(express.static(path.join(__dirname, 'dist/angular-pokedex-app/browser')));
 
 // Rediriger toutes les routes vers index.html (SPA)
