@@ -4,7 +4,6 @@ import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } fr
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { catchError, map, of } from 'rxjs';
 import { getPokemonColor, POKEMON_RULES } from '../../pokemon.model';
-import { PokemonService } from '../../pokemon.service';
 // Angular Material
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -14,6 +13,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PokemonService } from '../../pokemon.service';
+
 
 @Component({
   selector: 'app-pokemon-edit',

@@ -40,6 +40,27 @@ app.get('/api/pokemons/:id', async (req, res) => {
   }
 });
 
+app.put('/api/pokemons/:id', async (req, res) => {
+  try {
+    await client.connect();
+    const database = client.db('pokemons');
+    const collection = database.collection('pokemons');
+    
+    const { _id, ...updatedPokemon } = req.body;
+    const result = await collection.updateOne(
+      { id: parseInt(req.params.id) },
+      { $set: updatedPokemon }
+    );
+
+    if (!result.matchedCount) {
+      return res.status(404).json({ message: 'Pokemon non trouvé' });
+    }
+    res.json(updatedPokemon);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // Servir les fichiers statiques Angular depuis le dossier 'dist'
 app.use(express.static(path.join(__dirname, 'dist/angular-pokedex-app/browser')));
 

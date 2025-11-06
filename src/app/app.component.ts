@@ -12,5 +12,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 })
 
 export class AppComponent {
+  title(title: any) {
+    throw new Error('Method not implemented.');
+  }
   
 }

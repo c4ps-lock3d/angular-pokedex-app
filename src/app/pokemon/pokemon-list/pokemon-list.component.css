@@ -1,0 +1,12 @@
+.pokemon-card {
+  border-width: 2px;
+  transition: border-color 0.3s ease;
+  margin: 8px;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+  cursor: pointer;
+}
+
+.pokemon-card:hover {
+  border-color: black;
+}

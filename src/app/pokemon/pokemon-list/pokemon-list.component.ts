@@ -2,9 +2,8 @@ import { DatePipe } from '@angular/common';
 import { Component, computed, HostListener, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
-import { PokemonBorderDirective } from '../../pokemon-border.directive';
+//import { PokemonBorderDirective } from '../../pokemon-border.directive';
 import { Pokemon } from '../../pokemon.model';
-import { PokemonService } from '../../pokemon.service';
 import { catchError, of } from 'rxjs';
 // Angular Material
 import { MatButtonModule } from '@angular/material/button';
@@ -14,17 +13,13 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PokemonService } from '../../pokemon.service';
 
 @Component({
   selector: 'app-pokemon-list',
-  imports: [PokemonBorderDirective, DatePipe, RouterLink, MatButtonModule, MatCardModule, MatGridListModule, MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatIconModule],
+  imports: [DatePipe, RouterLink, MatButtonModule, MatCardModule, MatGridListModule, MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatIconModule],
   templateUrl: './pokemon-list.component.html',
-  styles: `.pokemon-card {
-    margin: 8px;
-    width: calc(100% - 16px);
-    height: calc(100% - 16px);
-    cursor: pointer;
-  }`
+  styleUrls: ['./pokemon-list.component.css']
 })
 
 export class PokemonListComponent {

@@ -9,14 +9,6 @@ import { AuthGuard } from './core/auth/auth.gard';
 import { LoginComponent } from './login/login.component';
 import { PokemonAddComponent } from './pokemon/pokemon-add/pokemon-add.component';
 import { PokemonService } from './pokemon.service';
-import { environment } from '../environments/environment';
-import { PokemonMongoDBService } from './pokemon-mongodb.service';
-
-export function pokemonServiceFactory(): PokemonService {
-  return environment.production
-    ? new PokemonMongoDBService()
-    : new PokemonMongoDBService();
-}
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, title: "Connexion" },
@@ -36,12 +28,10 @@ const routes: Routes = [
 ]
 
 export const appConfig: ApplicationConfig = {
-    providers: [provideZoneChangeDetection({ eventCoalescing: true }),
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
-    {
-      provide: PokemonService,
-      useFactory: pokemonServiceFactory,
-    },
+    PokemonService
   ]
 };
