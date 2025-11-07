@@ -59,15 +59,9 @@ app.put('/api/pokemons/:id', async (req, res) => {
     if (!result.matchedCount) {
       return res.status(404).json({ message: 'Pokemon non trouvé' });
     }
-    
-    // Retourner le pokemon modifié
-    const updatedDoc = await collection.findOne({ id: parseInt(req.params.id) });
-    res.json(updatedDoc);
+    res.json(updatedPokemon);
   } catch (error) {
-    console.error('Erreur lors de la mise à jour:', error);
     res.status(500).json({ message: error.message });
-  } finally {
-    await client.close();
   }
 });
 
