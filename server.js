@@ -40,7 +40,7 @@ app.get('/api/pokemons/:id', async (req, res) => {
   }
 });
 
-app.put('/api/pokemons/:id', async (req, res) => {
+app.put('/api/pokemons/edit/:id', async (req, res) => {
   try {
     await client.connect();
     const database = client.db('pokemons');
