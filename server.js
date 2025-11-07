@@ -6,7 +6,11 @@ const cors = require('cors');
 require('dotenv').config();
 
 
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:4200', 'https://pokedex.blizzardaudioclub.ch'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 const uri = process.env.MONGODB_URI;
