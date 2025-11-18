@@ -42,25 +42,25 @@
                   <tr>
                     <th style="text-align: left;">Points de vie</th>
                     <td>
-                      <div style="display: flex; align-items: center;">
-                        <button mat-mini-button color="primary" type="button" [disabled]="pokemonLife.value <= POKEMON_RULES.MIN_LIFE" (click)="decrementLife()">-</button>
+                        <button mat-raised-button color="primary" type="button"
+                          [disabled]="pokemonLife.value <= POKEMON_RULES.MIN_LIFE" (click)="decrementLife()">-</button>
                         <mat-form-field appearance="outline" style="width: 80px; margin: 0 8px;">
                           <input matInput formControlName="life" type="number" style="text-align: center;" />
                         </mat-form-field>
-                        <button mat-mini-button color="primary" type="button" [disabled]="pokemonLife.value >= POKEMON_RULES.MAX_LIFE" (click)="incrementLife()">+</button>
-                      </div>
+                        <button mat-raised-button color="primary" type="button"
+                          [disabled]="pokemonLife.value >= POKEMON_RULES.MAX_LIFE" (click)="incrementLife()">+</button>
                     </td>
                   </tr>
                   <tr>
                     <th style="text-align: left;">Dégâts</th>
                     <td>
-                      <div style="display: flex; align-items: center;">
-                        <button mat-mini-button color="primary" type="button" [disabled]="pokemonDamage.value <= POKEMON_RULES.MIN_DAMAGE" (click)="decrementDamage()">-</button>
+                        <button mat-raised-button color="primary" type="button"
+                          [disabled]="pokemonDamage.value <= POKEMON_RULES.MIN_DAMAGE" (click)="decrementDamage()">-</button>
                         <mat-form-field appearance="outline" style="width: 80px; margin: 0 8px;">
                           <input matInput formControlName="damage" type="number" style="text-align: center;" />
                         </mat-form-field>
-                        <button mat-mini-button color="primary" type="button" [disabled]="pokemonDamage.value >= POKEMON_RULES.MAX_DAMAGE" (click)="incrementDamage()">+</button>
-                      </div>
+                        <button mat-raised-button color="primary" type="button"
+                          [disabled]="pokemonDamage.value >= POKEMON_RULES.MAX_DAMAGE" (click)="incrementDamage()">+</button>
                     </td>
                   </tr>
                   <tr>
@@ -73,6 +73,7 @@
                             selected
                             (removed)="pokemonTypeList.removeAt(index)"
                             removable="true"
+                            style="margin:2px"
                           >
                             {{ type.value }}
                             <mat-icon matChipRemove>cancel</mat-icon>

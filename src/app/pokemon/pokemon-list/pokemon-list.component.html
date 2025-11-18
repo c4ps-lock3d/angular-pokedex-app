@@ -1,4 +1,4 @@
-<mat-grid-list cols="1" rowHeight="8:1">
+<mat-grid-list cols="1" rowHeight="14:1">
   <mat-grid-tile>
       <mat-form-field appearance="outline">
         <mat-label>Rechercher un Pokémon</mat-label>
@@ -20,7 +20,7 @@
       <mat-card class="pokemon-card" appearance="outlined" style="border-width: 2px;" [routerLink]="['/pokemons', pokemon.id]">
         <div style="display: flex;">
           <div style="display: flex; align-items: center; justify-content: center; background: #f8f9fa; border-top-left-radius: 8px; border-bottom-left-radius: 8px; overflow: hidden; width: 120px; min-width: 120px;">
-            <img style="width: 100%; height: auto; display: block;" [src]="pokemon.picture" alt="{{ pokemon.name }}" />
+            <img [src]="pokemon.picture" alt="{{ pokemon.name }}" />
           </div>
           <div style="flex: 1;">
             <div class="card-body" style="padding: 8px;">

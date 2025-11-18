@@ -1,0 +1,8 @@
+<div style="margin: 16px;">
+  <h2 style="margin-top:8px">{{ data.title || 'Confirmer' }}</h2>
+  <div>{{ data.message || 'Voulez-vous continuer ?' }}</div>
+  <div class="dialog-actions">
+    <button mat-button (click)="onCancel()">Non</button>
+    <button mat-button color="warn" (click)="onConfirm()">Oui</button>
+  </div>
+</div>

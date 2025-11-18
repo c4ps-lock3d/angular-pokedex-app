@@ -75,9 +75,9 @@
                 <tr>
                   <th style="text-align: left;">Points de vie</th>
                   <td>
-                    <div style="display: flex; align-items: center;">
+                    <div class="number-row">
                       <button
-                        mat-mini-button
+                        mat-raised-button
                         color="primary"
                         type="button"
                         [disabled]="pokemonLife.value <= POKEMON_RULES().MIN_LIFE"
@@ -95,7 +95,7 @@
                         />
                       </mat-form-field>
                       <button
-                        mat-mini-button
+                        mat-raised-button
                         color="primary"
                         type="button"
                         [disabled]="pokemonLife.value >= POKEMON_RULES().MAX_LIFE"
@@ -109,9 +109,9 @@
                 <tr>
                   <th style="text-align: left;">Dégâts</th>
                   <td>
-                    <div style="display: flex; align-items: center;">
+                    <div class="number-row">
                       <button
-                        mat-mini-button
+                        mat-raised-button
                         color="primary"
                         type="button"
                         [disabled]="pokemonDamage.value <= POKEMON_RULES().MIN_DAMAGE"
@@ -129,7 +129,7 @@
                         />
                       </mat-form-field>
                       <button
-                        mat-mini-button
+                        mat-raised-button
                         color="primary"
                         type="button"
                         [disabled]="pokemonDamage.value >= POKEMON_RULES().MAX_DAMAGE"
@@ -150,6 +150,7 @@
                         selected
                         (removed)="pokemonTypeList.removeAt(index)"
                         removable="true"
+                        style="margin:2px"
                       >
                         {{ type.value }}
                         <mat-icon matChipRemove>cancel</mat-icon>
@@ -157,12 +158,12 @@
                     }
                     <!-- Gestion des erreurs Types -->
                     @if(pokemonTypeList.hasError('required')) {
-                      <p class="text-danger">
+                      <p style="color: red;" class="text-danger">
                         Veuillez sélectionner au moins un type pour un Pokémon.
                       </p>
                     }
                     @if(pokemonTypeList.hasError('maxlength')) {
-                      <p class="text-danger">
+                      <p style="color: red;" class="text-danger">
                         Veuillez sélectionner au maximum
                         {{ pokemonTypeList.getError("maxlength").requiredLength }}
                         types pour un Pokémon.
@@ -172,7 +173,6 @@
                       @for(type of pokemonService.getPokemonTypeList(); track type) {
                         <mat-checkbox
                           [checked]="isPokemonTypeSelected(type)"
-                          [disabled]="isPokemonTypeSelected(type)"
                           (change)="onPokemonTypeChange(type, $event.checked)"
                           color="primary"
                         >

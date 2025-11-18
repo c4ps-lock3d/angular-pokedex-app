@@ -15,24 +15,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PokemonService } from '../../pokemon.service';
 
-
 @Component({
   selector: 'app-pokemon-edit',
- imports: [
-  RouterLink,
-  ReactiveFormsModule,
-  MatCardModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatButtonModule,
-  MatIconModule,
-  MatCheckboxModule,
-  MatChipsModule,
-  MatProgressSpinnerModule,
-],
-  // imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink,ReactiveFormsModule,MatCardModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatIconModule,MatCheckboxModule,MatChipsModule,MatProgressSpinnerModule],
   templateUrl: './pokemon-edit.component.html',
-  styles: ``
+  styleUrls: ['./pokemon-edit.component.css']
 })
 
 export class PokemonEditComponent {

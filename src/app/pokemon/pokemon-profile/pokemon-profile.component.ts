@@ -14,12 +14,14 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-pokemon-profile',
-  imports: [RouterLink, DatePipe, MatButtonModule, MatCardModule, MatGridListModule, MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatIconModule,MatChipsModule],
+  imports: [RouterLink, DatePipe, MatButtonModule, MatCardModule, MatGridListModule, MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatIconModule, MatChipsModule, MatDialogModule],
   templateUrl: './pokemon-profile.component.html',
-  styles: ``
+  styleUrls: ['./pokemon-profile.component.css']
 })
 
 export class PokemonProfileComponent {
@@ -39,10 +41,28 @@ export class PokemonProfileComponent {
   readonly loading = computed(() => this.#pokemonResponse() === undefined);
   readonly error = computed(() => this.#pokemonResponse()?.error !== undefined); // ? = shining operator -> si le chemin n'existe pas, retourne undefined
   readonly pokemon = computed(() => this.#pokemonResponse()?.value);
+  readonly #dialog = inject(MatDialog);
   
   deletePokemon() {
     this.#pokemonService.deletePokemon(this.#pokemonId).subscribe(() => {
       this.#router.navigate(['/pokemons']);
+    });
+  }
+
+  openDeleteDialog() {
+    const dialogRef = this.#dialog.open(ConfirmDialogComponent, {
+      height: 'auto',
+      width: 'auto',
+      data: {
+        title: 'Supprimer le Pokémon',
+        message: 'Êtes‑vous sûr de vouloir supprimer ce Pokémon ?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.deletePokemon();
+      }
     });
   }
 }

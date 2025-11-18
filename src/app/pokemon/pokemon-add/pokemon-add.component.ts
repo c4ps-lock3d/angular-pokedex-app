@@ -13,25 +13,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PokemonService } from '../../pokemon.service';
 
-
-
 @Component({
   selector: 'app-pokemon-add',
   standalone: true,
-  imports: [
-    RouterLink,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatProgressSpinnerModule,
-  ],
+  imports: [RouterLink,ReactiveFormsModule,MatCardModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatIconModule,MatCheckboxModule,MatChipsModule,MatProgressSpinnerModule],
   templateUrl: './pokemon-add.component.html',
-  styles: ``
+  styleUrls: ['./pokemon-add.component.css']
 })
 export class PokemonAddComponent {
   readonly router = inject(Router);

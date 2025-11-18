@@ -37,7 +37,7 @@
               <button mat-button color="accent" [routerLink]="['/pokemons/edit/', pokemon.id]">
                 <mat-icon>edit</mat-icon> ÉDITER
               </button>
-              <button mat-button color="warn" (click)="deletePokemon()">
+              <button mat-button color="warn" (click)="openDeleteDialog()">
                 <mat-icon>delete</mat-icon> SUPPRIMER
               </button>
             </div>
