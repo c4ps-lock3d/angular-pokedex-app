@@ -16,7 +16,8 @@ app.use(express.json());
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
 
-// Routes API (backend)
+// Routes API
+// Récupérer tous les pokémons
 app.get('/api/pokemons', async (req, res) => {
   try {
     await client.connect();
@@ -29,6 +30,7 @@ app.get('/api/pokemons', async (req, res) => {
   }
 });
 
+// Récupérer un pokémon par son ID
 app.get('/api/pokemons/:id', async (req, res) => {
   try {
     await client.connect();
@@ -44,22 +46,67 @@ app.get('/api/pokemons/:id', async (req, res) => {
   }
 });
 
+// Mettre à jour un pokémon par son ID
 app.put('/api/pokemons/:id', async (req, res) => {
   try {
     await client.connect();
     const database = client.db('pokemons');
     const collection = database.collection('pokemons');
     
-    const { _id, ...updatedPokemon } = req.body;
+    const { _id, ...updatedPokemon } = req.body; // Exclure le champ _id
     const result = await collection.updateOne(
-      { id: parseInt(req.params.id) },
-      { $set: updatedPokemon }
+      { id: parseInt(req.params.id) }, // Utiliser le champ id pour la recherche
+      { $set: updatedPokemon } // Mettre à jour avec les nouvelles données
     );
 
     if (!result.matchedCount) {
       return res.status(404).json({ message: 'Pokemon non trouvé' });
     }
-    res.json(updatedPokemon);
+    res.json(updatedPokemon); // Retourner les données mises à jour
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Ajouter un nouveau pokémon
+app.post('/api/pokemons', async (req, res) => {
+  try {
+    await client.connect();
+    const database = client.db('pokemons');
+    const collection = database.collection('pokemons');
+
+    const newPokemon = { ...req.body };
+    delete newPokemon._id; // ne pas propager _id venant du client
+
+    // calculer un id numérique : max(id) + 1
+    const last = await collection.find().sort({ id: -1 }).limit(1).toArray();
+    const nextId = (last[0] && typeof last[0].id === 'number') ? last[0].id + 1 : 1;
+    newPokemon.id = nextId;
+
+    // ajouter created si absent
+    newPokemon.created = newPokemon.created || new Date().toISOString();
+
+    const result = await collection.insertOne(newPokemon);
+    const inserted = await collection.findOne({ _id: result.insertedId });
+
+    res.status(201).json(inserted);
+  } catch (error) {
+    console.error('POST /api/pokemons error:', error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Supprimer un pokémon par son ID
+app.delete('/api/pokemons/:id', async (req, res) => {
+  try {
+    await client.connect();
+    const database = client.db('pokemons');
+    const collection = database.collection('pokemons');
+    const result = await collection.deleteOne({ id: parseInt(req.params.id) });
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: 'Pokemon non trouvé' });
+    }
+    res.json({ message: 'Pokemon supprimé avec succès' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
