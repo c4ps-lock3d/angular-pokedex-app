@@ -23,15 +23,15 @@ const routes: Routes = [
   //   { path: '', component: PokemonListComponent, title: 'Liste des Pokémons' },
   //   ]
   // },
-  { path: '', redirectTo: '/pokemons', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent},
+  { path: '', redirectTo: '/pokemons', pathMatch: 'full' }, // route par défaut
+  { path: '**', component: PageNotFoundComponent}, // intercepte toutes les routes non définies
 ]
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
-    provideHttpClient(),
-    PokemonService
+    provideZoneChangeDetection({ eventCoalescing: true }), // Améliore les performances en regroupant les changements de détection
+    provideRouter(routes), // Ajout du routeur aux providers de l'application
+    provideHttpClient(), // Ajout du HttpClient aux providers de l'application
+    PokemonService // Ajout du service PokemonService aux providers de l'application
   ]
 };
