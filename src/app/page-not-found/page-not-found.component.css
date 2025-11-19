@@ -1,0 +1,59 @@
+/* Conteneur principal */
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Card */
+.not-found-card {
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Card body */
+.not-found-card-body {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* Image */
+.not-found-image {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Titre */
+.not-found-title {
+  margin-top: 32px;
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+/* Lien de retour */
+.not-found-link {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 12px 24px;
+  background-color: transparent;
+  color: #1976d2;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.not-found-link:hover {
+  background-color: #f0f0f0;
+  color: #1565c0;
+  text-decoration: none;
+}
