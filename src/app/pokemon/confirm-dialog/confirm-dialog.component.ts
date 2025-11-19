@@ -8,9 +8,7 @@ import { MatDialogModule } from '@angular/material/dialog';
   standalone: true,
   imports: [MatButtonModule, MatDialogModule],
   templateUrl: './confirm-dialog.component.html',
-  styles: [`
-    .dialog-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:16px; }
-  `]
+  styleUrls: ['./confirm-dialog.component.css']
 })
 export class ConfirmDialogComponent {
   readonly dialogRef = inject(MatDialogRef<ConfirmDialogComponent>);

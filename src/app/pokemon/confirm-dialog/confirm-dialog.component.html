@@ -1,8 +1,8 @@
-<div style="margin: 16px;">
-  <h2 style="margin-top:8px">{{ data.title || 'Confirmer' }}</h2>
-  <div>{{ data.message || 'Voulez-vous continuer ?' }}</div>
+<div class="dialog-container">
+  <h2 class="dialog-title">{{ data.title || 'Confirmer' }}</h2>
+  <div class="dialog-message">{{ data.message || 'Voulez-vous continuer ?' }}</div>
   <div class="dialog-actions">
-    <button mat-button (click)="onCancel()">Non</button>
-    <button mat-button color="warn" (click)="onConfirm()">Oui</button>
+    <button mat-button class="dialog-button" (click)="onCancel()">Non</button>
+    <button mat-button color="warn" class="dialog-button" (click)="onConfirm()">Oui</button>
   </div>
 </div>

@@ -16,3 +16,72 @@ img {
   height: auto;
   display: block;
 }
+
+/* Conteneur de recherche */
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Loader */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+/* Conteneur de la grille de cartes */
+.pokemon-grid {
+  width: 100%;
+}
+
+/* Image du pokémon */
+.pokemon-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  overflow: hidden;
+  width: 120px;
+  min-width: 120px;
+}
+
+/* Contenu de la carte */
+.card-body {
+  padding: 8px;
+  flex: 1;
+}
+
+.card-title {
+  margin: 0;
+}
+
+.card-subtitle {
+  margin: 8px 0 0 0;
+  color: #757575;
+}
+
+/* Infos du pokémon */
+.pokemon-info {
+  margin-top: 8px;
+  color: #757575;
+}
+
+.pokemon-info p {
+  margin: 0;
+}
+
+/* Bouton FAB */
+.fab-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+}
+
+/* Conteneur principal */
+.card-wrapper {
+  display: flex;
+}

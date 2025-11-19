@@ -1,23 +1,23 @@
-<div style="margin: 2rem;">
+<div class="add-container">
   <mat-card>
-    <div style="display: flex; flex-wrap: wrap;">
-      <div style="display: flex; align-items: center; justify-content: center; background: #f8f9fa; border-top-left-radius: 8px; border-bottom-left-radius: 8px; overflow: hidden; width: 200px; min-width: 120px;">
+    <div class="card-wrapper">
+      <div class="pokemon-image-container">
         <img
+          class="pokemon-image"
           [src]="pokemonPicture.value"
-          style="width: 100%; height: auto; display: block;"
           [alt]="pokemonName.value"
         />
       </div>
-      <div style="flex: 1;">
+      <div class="form-container">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-          <div style="padding: 16px;">
-            <h2>Ajouter un nouveau Pokémon</h2>
-            <table style="width: 100%;">
+          <div class="form-padding">
+            <h2 class="form-title">Ajouter un nouveau Pokémon</h2>
+            <table>
               <tbody>
                 <tr>
-                  <th style="text-align: left;">Nom</th>
+                  <th>Nom</th>
                   <td>
-                    <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-form-field appearance="outline" class="full-width-field">
                       <input
                         matInput
                         type="text"
@@ -55,9 +55,9 @@
                   </td>
                 </tr>
                 <tr>
-                  <th style="text-align: left;">Image</th>
+                  <th>Image</th>
                   <td>
-                    <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-form-field appearance="outline" class="full-width-field">
                       <input
                         matInput
                         type="text"
@@ -73,24 +73,25 @@
                   </td>
                 </tr>
                 <tr>
-                  <th style="text-align: left;">Points de vie</th>
+                  <th>Points de vie</th>
                   <td>
                     <div class="number-row">
                       <button
                         mat-raised-button
                         color="primary"
                         type="button"
+                        class="ctrl-btn"
                         [disabled]="pokemonLife.value <= POKEMON_RULES().MIN_LIFE"
                         (click)="decrementLife()"
                       >
                         -
                       </button>
-                      <mat-form-field appearance="outline" style="width: 80px; margin: 0 8px;">
+                      <mat-form-field appearance="outline" class="small-number-input">
                         <input
                           matInput
                           type="number"
                           formControlName="life"
-                          style="text-align: center;"
+                          class="number-input"
                           readonly
                         />
                       </mat-form-field>
@@ -98,6 +99,7 @@
                         mat-raised-button
                         color="primary"
                         type="button"
+                        class="ctrl-btn"
                         [disabled]="pokemonLife.value >= POKEMON_RULES().MAX_LIFE"
                         (click)="incrementLife()"
                       >
@@ -107,24 +109,25 @@
                   </td>
                 </tr>
                 <tr>
-                  <th style="text-align: left;">Dégâts</th>
+                  <th>Dégâts</th>
                   <td>
                     <div class="number-row">
                       <button
                         mat-raised-button
                         color="primary"
                         type="button"
+                        class="ctrl-btn"
                         [disabled]="pokemonDamage.value <= POKEMON_RULES().MIN_DAMAGE"
                         (click)="decrementDamage()"
                       >
                         -
                       </button>
-                      <mat-form-field appearance="outline" style="width: 80px; margin: 0 8px;">
+                      <mat-form-field appearance="outline" class="small-number-input">
                         <input
                           matInput
                           type="number"
                           formControlName="damage"
-                          style="text-align: center;"
+                          class="number-input"
                           readonly
                         />
                       </mat-form-field>
@@ -132,6 +135,7 @@
                         mat-raised-button
                         color="primary"
                         type="button"
+                        class="ctrl-btn"
                         [disabled]="pokemonDamage.value >= POKEMON_RULES().MAX_DAMAGE"
                         (click)="incrementDamage()"
                       >
@@ -141,35 +145,37 @@
                   </td>
                 </tr>
                 <tr>
-                  <th style="text-align: left;">Types</th>
+                  <th>Types</th>
                   <td>
                     <!-- Affichage des types sélectionnés -->
-                    @for(type of pokemonTypeList.controls; track type; let index = $index) {
-                      <mat-chip
-                        color="primary"
-                        selected
-                        (removed)="pokemonTypeList.removeAt(index)"
-                        removable="true"
-                        style="margin:2px"
-                      >
-                        {{ type.value }}
-                        <mat-icon matChipRemove>cancel</mat-icon>
-                      </mat-chip>
-                    }
+                    <div class="types-container">
+                      @for(type of pokemonTypeList.controls; track type; let index = $index) {
+                        <mat-chip
+                          color="primary"
+                          selected
+                          (removed)="pokemonTypeList.removeAt(index)"
+                          removable="true"
+                          class="type-chip"
+                        >
+                          {{ type.value }}
+                          <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                      }
+                    </div>
                     <!-- Gestion des erreurs Types -->
                     @if(pokemonTypeList.hasError('required')) {
-                      <p style="color: red;" class="text-danger">
+                      <p class="invalid-feedback types-error">
                         Veuillez sélectionner au moins un type pour un Pokémon.
                       </p>
                     }
                     @if(pokemonTypeList.hasError('maxlength')) {
-                      <p style="color: red;" class="text-danger">
+                      <p class="invalid-feedback types-error">
                         Veuillez sélectionner au maximum
                         {{ pokemonTypeList.getError("maxlength").requiredLength }}
                         types pour un Pokémon.
                       </p>
                     }
-                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;">
+                    <div class="types-checkboxes">
                       @for(type of pokemonService.getPokemonTypeList(); track type) {
                         <mat-checkbox
                           [checked]="isPokemonTypeSelected(type)"
@@ -184,7 +190,7 @@
                 </tr>
               </tbody>
             </table>
-            <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+            <div class="action-buttons">
               <button
                 mat-button
                 color="primary"

@@ -1,0 +1,161 @@
+/* Conteneur principal */
+.edit-container {
+  margin: 2rem;
+}
+
+/* Card wrapper avec flex layout */
+.card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Conteneur image */
+.pokemon-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  overflow: hidden;
+  width: 200px;
+  min-width: 120px;
+}
+
+/* Image du pokémon */
+.pokemon-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Conteneur du formulaire */
+.form-container {
+  flex: 1;
+}
+
+/* Padding interne */
+.form-padding {
+  padding: 16px;
+}
+
+/* Titre du pokémon */
+.pokemon-title {
+  margin-top: 0;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th {
+  text-align: left;
+  vertical-align: middle;
+}
+
+table td {
+  vertical-align: middle;
+  padding: 8px 0;
+}
+
+/* Form field styling */
+.full-width-field {
+  width: 100%;
+}
+
+.small-number-input {
+  width: 80px;
+  margin: 0 8px;
+}
+
+/* Nombre row pour les boutons +/- */
+.number-row {
+  display: flex;
+  align-items: center;
+}
+
+/* Boutons de contrôle */
+.ctrl-btn {
+  height: 40px;
+  min-width: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Input centré */
+.number-input {
+  text-align: center;
+}
+
+/* Feedback d'erreur */
+.invalid-feedback {
+  color: #d32f2f;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Conteneur des types */
+.types-container {
+  margin-bottom: 8px;
+}
+
+/* Chip styling */
+.type-chip {
+  margin: 2px;
+}
+
+/* Conteneur des checkboxes */
+.types-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* Erreur types */
+.types-error {
+  color: #d32f2f;
+  margin-top: 8px;
+}
+
+/* Conteneur des boutons d'action */
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+/* Loader */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+/* Conteneur d'erreur */
+.error-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* Conteneur du contenu d'erreur */
+.error-content {
+  padding: 16px;
+}
+
+/* Image d'erreur */
+.error-image {
+  display: block;
+  margin: 0 auto;
+  width: 120px;
+}
+
+/* Titre d'erreur */
+.error-title {
+  margin-top: 2rem;
+}

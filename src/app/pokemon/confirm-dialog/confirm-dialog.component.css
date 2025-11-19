@@ -1,0 +1,29 @@
+/* Conteneur principal de la boîte de dialogue */
+.dialog-container {
+  margin: 16px;
+}
+
+/* Titre de la boîte de dialogue */
+.dialog-title {
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+/* Message de la boîte de dialogue */
+.dialog-message {
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+/* Conteneur des boutons d'action */
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+/* Bouton d'action */
+.dialog-button {
+  padding: 8px 16px;
+}
