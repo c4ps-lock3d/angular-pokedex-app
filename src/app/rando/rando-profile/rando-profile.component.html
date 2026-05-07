@@ -1,0 +1,49 @@
+<div class="profile-container">
+  @if (rando(); as rando) {
+    <mat-card>
+      <div class="card-wrapper">
+        <!-- <div class="rando-image-container">
+          <img class="rando-image" [src]="rando.picture" [alt]="rando.name" />
+        </div> -->
+        <div class="rando-content">
+          <div class="content-padding">
+            <h2 class="rando-title">{{ rando.title }}</h2>
+            <div class="action-buttons">
+              <button mat-button color="primary" routerLink="/randos">
+                <mat-icon>arrow_back</mat-icon> RETOUR
+              </button>
+              <button mat-button color="accent" [routerLink]="['/randos/edit/', rando.id]">
+                <mat-icon>edit</mat-icon> ÉDITER
+              </button>
+              <button mat-button color="warn" (click)="openDeleteDialog()">
+                <mat-icon>delete</mat-icon> SUPPRIMER
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  }
+  @if(loading()) {
+    <div class="loader-container">
+      <mat-spinner color="primary"></mat-spinner>
+    </div>
+  }
+  @if(error()) {
+    <div class="error-container">
+      <mat-card>
+        <div class="content-padding">
+          <img
+            class="error-image"
+            src="http://assets.pokemon.com/assets/cms2/img/pokedex/full/035.png"
+            alt="Rondoudou"
+          />
+          <h2 class="error-title">Hey, cette page n'existe pas !</h2>
+          <button mat-button color="primary" routerLink="/pokemons">
+            <mat-icon>arrow_back</mat-icon> RETOURNER À L'ACCUEIL
+          </button>
+        </div>
+      </mat-card>
+    </div>
+  }
+</div>

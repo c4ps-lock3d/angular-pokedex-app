@@ -30,23 +30,23 @@ app.get('/api/randos', async (req, res) => {
   }
 });
 
-// Récupérer un pokémon par son ID
-// app.get('/api/pokemons/:id', async (req, res) => {
-//   try {
-//     await client.connect();
-//     const database = client.db('pokemons');
-//     const collection = database.collection('pokemons');
-//     const pokemon = await collection.findOne({ id: parseInt(req.params.id) });
-//     if (!pokemon) {
-//       return res.status(404).json({ message: 'Pokemon non trouvé' });
-//     }
-//     res.json(pokemon);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// });
+// Récupérer une rando par son ID
+app.get('/api/randos/:id', async (req, res) => {
+  try {
+    await client.connect();
+    const database = client.db('randos');
+    const collection = database.collection('gpxes');
+    const rando = await collection.findOne({ id: parseInt(req.params.id) });
+    if (!rando) {
+      return res.status(404).json({ message: 'Rando non trouvée' });
+    }
+    res.json(rando  );
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
-// Mettre à jour un pokémon par son ID
+// // Mettre à jour un pokémon par son ID
 // app.put('/api/pokemons/:id', async (req, res) => {
 //   try {
 //     await client.connect();
@@ -68,7 +68,7 @@ app.get('/api/randos', async (req, res) => {
 //   }
 // });
 
-// Ajouter un nouveau pokémon
+// // Ajouter un nouveau pokémon
 // app.post('/api/pokemons', async (req, res) => {
 //   try {
 //     await client.connect();
@@ -96,7 +96,7 @@ app.get('/api/randos', async (req, res) => {
 //   }
 // });
 
-// Supprimer un pokémon par son ID
+// // Supprimer un pokémon par son ID
 // app.delete('/api/pokemons/:id', async (req, res) => {
 //   try {
 //     await client.connect();

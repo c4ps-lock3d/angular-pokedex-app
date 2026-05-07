@@ -15,26 +15,21 @@ export class RandoService implements RandoService {
     return this.http.get<RandoList>(this.RANDO_API_URL); // Récupère la liste des Randos
   }
 
-//   getRandoById(id: number): Observable<Pokemon> { 
-//     return this.http.get<Pokemon>(`${this.POKEMON_API_URL}/${id}`); // Récupère un Pokémon par son ID
-//   }
+  getRandoById(id: number): Observable<Rando> { 
+    return this.http.get<Rando>(`${this.RANDO_API_URL}/${id}`); // Récupère une Rando par son ID
+  }
 
 //   updatePokemon(pokemon: Pokemon): Observable<Pokemon> { 
 //     return this.http.put<Pokemon>(`${this.POKEMON_API_URL}/${pokemon.id}`, pokemon); // Met à jour un Pokémon
 //   }
 
-//   deletePokemon(pokemonId: number): Observable<void> {
-//     return this.http.delete<void>(`${this.POKEMON_API_URL}/${pokemonId}`); // Supprime un Pokémon
-//   }
+   deleteRando(randoId: number): Observable<void> {
+     return this.http.delete<void>(`${this.RANDO_API_URL}/${randoId}`); // Supprime une Rando
+   }
 
 //   addPokemon(pokemon: Omit<Pokemon, 'id'>): Observable<Pokemon> { 
 //     return this.http.post<Pokemon>(this.POKEMON_API_URL, pokemon); // Ajoute un nouveau Pokémon
 //   }
 
-//   getPokemonTypeList(): string[] { // Retourne la liste des types de Pokémon
-//     return [
-//       'Plante', 'Feu', 'Eau', 'Insecte', 'Normal',
-//       'Electrik', 'Poison', 'Fée', 'Vol'
-//     ];
-//   }
+
 }

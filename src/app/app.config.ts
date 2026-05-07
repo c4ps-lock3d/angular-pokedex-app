@@ -1,29 +1,25 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, Routes } from '@angular/router';
-import { PokemonListComponent } from './pokemon/pokemon-list/pokemon-list.component';
-import { RandoListComponent } from './pokemon/rando-list/rando-list.component';
-import { PokemonProfileComponent } from './pokemon/pokemon-profile/pokemon-profile.component';
+import { RandoListComponent } from './rando/rando-list/rando-list.component';
+import { RandoProfileComponent } from './rando/rando-profile/rando-profile.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { PokemonEditComponent } from './pokemon/pokemon-edit/pokemon-edit.component';
+import { PokemonEditComponent } from './rando/pokemon-edit/pokemon-edit.component';
 import { provideHttpClient } from '@angular/common/http';
 import { AuthGuard } from './core/auth/auth.gard';
 import { LoginComponent } from './login/login.component';
-import { PokemonAddComponent } from './pokemon/pokemon-add/pokemon-add.component';
-import { PokemonService } from './pokemon.service';
-import { RandoService } from './rando.service';
+import { PokemonAddComponent } from './rando/pokemon-add/pokemon-add.component';
 
 const routes: Routes = [
   //{ path: 'login', component: LoginComponent, title: "Connexion" },
-    //{ path: 'pokemons/add', component: PokemonAddComponent, title: "Ajout d'un Pokémon", },
-    //{ path: 'pokemons/edit/:id', component: PokemonEditComponent, title: "Edition d'un Pokémon" },
-    //{ path: 'pokemons/:id', component: PokemonProfileComponent, title: 'Profil du Pokémon' },
-    //{ path: 'pokemons', component: PokemonListComponent, title: 'Liste des Pokémons' },
+    //{ path: 'randos/add', component: RandoAddComponent, title: "Ajout d'une Rando", },
+    //{ path: 'randos/edit/:id', component: RandoEditComponent, title: "Edition d'une Rando" },
+    { path: 'randos/:id', component: RandoProfileComponent, title: 'Profil de la Rando' },
     { path: 'randos', component: RandoListComponent, title: 'Liste des Randos' },
-  // { path: 'pokemons', canActivateChild: [AuthGuard], children: [
-  //   { path: 'add', component: PokemonAddComponent, title: "Ajout d'un Pokémon", },
-  //   { path: 'edit/:id', component: PokemonEditComponent, title: "Edition d'un Pokémon" },
-  //   { path: ':id', component: PokemonProfileComponent, title: 'Profil du Pokémon' },
-  //   { path: '', component: PokemonListComponent, title: 'Liste des Pokémons' },
+  // { path: 'randos', canActivateChild: [AuthGuard], children: [
+  //   { path: 'add', component: RandoAddComponent, title: "Ajout d'une Rando", },
+  //   { path: 'edit/:id', component: RandoEditComponent, title: "Edition d'une Rando" },
+     { path: ':id', component: RandoProfileComponent, title: 'Profil de la Rando' },
+     { path: '', component: RandoListComponent, title: 'Liste des Randos  ' },
   //   ]
   // },
   { path: '', redirectTo: '/randos', pathMatch: 'full' }, // route par défaut
@@ -35,5 +31,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }), // Améliore les performances en regroupant les changements de détection
     provideRouter(routes), // Ajout du routeur aux providers de l'application
     provideHttpClient(), // Ajout du HttpClient aux providers de l'application
+    //PokemonService, // Ajout du service PokemonService aux providers de l'application
+    //RandoService // Ajout du service RandoService aux providers de l'application
   ]
 };
