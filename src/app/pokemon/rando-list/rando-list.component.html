@@ -1,0 +1,46 @@
+<mat-grid-list cols="1" rowHeight="14:1">
+  <mat-grid-tile class="search-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Rechercher une rando</mat-label>
+      <input matInput id="search" type="text" name="searchTerm" placeholder="Nom de la rando"
+             #searchFiel [value]="searchTerm()" (input)="searchTerm.set(searchFiel.value)" />
+    </mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>
+
+@if(loading()) {
+  <div class="loader-container">
+    <mat-spinner color="primary"></mat-spinner>
+  </div>
+}
+
+<mat-grid-list class="rando-grid" [cols]="cols()" rowHeight="2:1" gutterSize="0">
+  @for(rando of randoListFiltered(); track rando.id) {   
+    <mat-grid-tile>
+      <mat-card class="rando-card" appearance="outlined" [routerLink]="['/randos', rando.id]">
+        <div class="card-wrapper">
+          <div class="rando-image-container">
+            <!--<img [src]="rando.picture" alt="{{ rando.name }}" />-->
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ rando.title }}</h5>
+            <h6 class="card-subtitle">
+              <!--Taille : {{ size(rando) }}-->
+            </h6>
+            <div class="rando-info">
+              <!--<p>Points de vie : {{ rando.life }}</p>-->
+              <!--<p>Dégats : {{ rando.damage }}</p>-->
+              <!--<p>{{ rando.created | date }}</p>-->
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+  }
+</mat-grid-list>
+
+<div class="fab-button">
+  <button mat-fab color="primary" aria-label="Ajouter une Rando" routerLink="/randos/add">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
