@@ -22,8 +22,17 @@ app.get('/api/randos', async (req, res) => {
   try {
     await client.connect();
     const database = client.db('randos');
-    const collection = database.collection('gpxes');
-    const randos = await collection.find({}).toArray();
+    const collection = database.collection('gpxes_denormalized');
+    const randos = await collection.aggregate([
+      {
+        $lookup: {
+          from: "tags",
+          localField: "tag_ids",
+          foreignField: "id",
+          as: "tags"
+        }
+      }
+    ]).toArray();
     res.json(randos);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -35,7 +44,7 @@ app.get('/api/randos/:id', async (req, res) => {
   try {
     await client.connect();
     const database = client.db('randos');
-    const collection = database.collection('gpxes');
+    const collection = database.collection('gpxes_denormalized');
     const rando = await collection.findOne({ id: parseInt(req.params.id) });
     if (!rando) {
       return res.status(404).json({ message: 'Rando non trouvée' });

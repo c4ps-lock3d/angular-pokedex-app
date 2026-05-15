@@ -25,12 +25,19 @@
           <div class="card-body">
             <h5 class="card-title">{{ rando.title }}</h5>
             <h6 class="card-subtitle">
-              <!--Taille : {{ size(rando) }}-->
+              Difficultée : {{ rando.cat_difficulty_name }}
+            </h6>
+            <h6 class="card-subtitle">
+              Layout : {{ rando.cat_layout_name }}
+            </h6>
+            <h6 class="card-subtitle">
+              Chien compatible : {{ rando.cat_dogfriendly_name }}
             </h6>
             <div class="rando-info">
-              <!--<p>Points de vie : {{ rando.life }}</p>-->
-              <!--<p>Dégats : {{ rando.damage }}</p>-->
-              <!--<p>{{ rando.created | date }}</p>-->
+              <p>Tags :</p>
+              @for(tag of rando.tags; track tag.id) {
+                <span class="tag">{{ tag.name }}</span>
+              }
             </div>
           </div>
         </div>
