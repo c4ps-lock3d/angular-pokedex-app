@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://pokedex.blizzardaudioclub.ch/api/randos'
+    apiUrl: '/api/randos'
 };

@@ -7,7 +7,11 @@ require('dotenv').config();
 
 
 app.use(cors({
-  origin: ['http://localhost:4200', 'https://pokedex.blizzardaudioclub.ch'],
+  origin: [
+    'http://localhost:4200',
+    'https://pokedex.blizzardaudioclub.ch',
+    'https://randos.blizzardaudioclub.ch'
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
