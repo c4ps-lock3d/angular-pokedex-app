@@ -53,9 +53,9 @@ app.get('/api/randos/:id', async (req, res) => {
     ]).toArray();
     res.json(rando[0]);
     //res.json(rando);
-    if (!rando || rando.length === 0) {
-      return res.status(404).json({ message: 'Rando non trouvée' });
-    }
+    //if (!rando || rando.length === 0) {
+      //return res.status(404).json({ message: 'Rando non trouvée' });
+    //}
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
