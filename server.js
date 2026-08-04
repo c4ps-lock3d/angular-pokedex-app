@@ -25,7 +25,7 @@ app.get('/api/randos', async (req, res) => {
   try {
     await client.connect();
     const database = client.db('randos');
-    const collection = database.collection('gpxes_double');
+    const collection = database.collection('gpxes');
     const randos = await collection.find({}).toArray();
     res.json(randos);
   } catch (error) {
@@ -38,7 +38,7 @@ app.get('/api/randos/:id', async (req, res) => {
   try {
     await client.connect();
     const database = client.db('randos');
-    const collection = database.collection('gpxes_double');
+    const collection = database.collection('gpxes');
     //const rando = await collection.findOne({ id: parseInt(req.params.id) });
     const rando = await collection.aggregate([
       { $match: { id: parseInt(req.params.id) } },
