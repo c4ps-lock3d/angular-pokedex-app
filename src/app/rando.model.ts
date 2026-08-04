@@ -30,11 +30,13 @@ export interface Rando {
   cat_difficulty_name: string;
   cat_dogfriendly_name: string;
   cat_layout_name: string;
-  traces: [
+  trails: [
     {
       id: number;
       ele: number;
       dis: number;
+      lat: number;
+      lon: number;
     }
   ]
 }

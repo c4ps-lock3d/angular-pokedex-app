@@ -8,8 +8,8 @@
         <div class="rando-content">
           <div class="content-padding">
             <h2 class="rando-title">{{ rando.title }}</h2>
-            @for(trace of rando.traces; track trace.id) {
-              <span>Ele: {{ trace.ele }}, Dis: {{ trace.dis }}</span>
+            @for(trail of rando.trails; track trail.id) {
+              <span>Ele: {{ trail.ele }}, Dis: {{ trail.dis }}, Lat: {{ trail.lat }}, Lon: {{ trail.lon }}</span>
             }
             <div class="action-buttons">
               <button mat-button color="primary" routerLink="/randos">
