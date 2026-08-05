@@ -2,6 +2,14 @@ import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewIn
 import * as L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
+// Configurer Leaflet pour utiliser les images du dossier public
+L.Icon.Default.mergeOptions({
+  iconUrl: '/assets/leaflet/marker-icon.png',
+  iconRetinaUrl: '/assets/leaflet/marker-icon-2x.png',
+  shadowUrl: '/assets/leaflet/marker-shadow.png',
+  shadowRetinaUrl: '/assets/leaflet/marker-shadow-2x.png'
+});
+
 @Component({
   selector: 'app-rando-map',
   imports: [],
