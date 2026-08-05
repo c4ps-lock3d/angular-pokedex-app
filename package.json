@@ -7,6 +7,7 @@
   },
   "scripts": {
     "ng": "ng",
+    "prebuild": "mkdir -p public/assets/leaflet && cp -r node_modules/leaflet/dist/images/* public/assets/leaflet/",
     "start": "ng serve",
     "start:api": "json-server db.json",
     "build": "ng build --configuration production",
