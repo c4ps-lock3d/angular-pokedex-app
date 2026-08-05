@@ -8,9 +8,11 @@
         <div class="rando-content">
           <div class="content-padding">
             <h2 class="rando-title">{{ rando.title }}</h2>
-            @for(trail of rando.trails; track trail.id) {
+            <!--@for(trail of rando.trails; track trail.id) {
               <span>Dis: {{ trail.dis }}, Ele: {{ trail.ele }}</span>
-            }
+          }-->
+            <app-rando-map [trails]="rando.trails"></app-rando-map>
+            <app-rando-elevation-chart [trails]="rando.trails"></app-rando-elevation-chart>
             <div class="action-buttons">
               <button mat-button color="primary" routerLink="/randos">
                 <mat-icon>arrow_back</mat-icon> RETOUR

@@ -4,6 +4,8 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { catchError, map, of } from 'rxjs';
 import { RandoService } from '../../rando.service';
+import { RandoElevationChartComponent } from '../rando-elevation-chart/rando-elevation-chart.component';
+import { RandoMapComponent } from '../rando-map/rando-map.component';
 
 // Angular Material
 import { MatButtonModule } from '@angular/material/button';
@@ -19,7 +21,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 
 @Component({
   selector: 'app-rando-profile',
-  imports: [RouterLink, MatButtonModule, MatCardModule, MatGridListModule, MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatIconModule, MatChipsModule, MatDialogModule],
+  imports: [RandoElevationChartComponent, RandoMapComponent, RouterLink, MatButtonModule, MatCardModule, MatGridListModule, MatProgressSpinnerModule, MatFormFieldModule, MatInputModule, MatIconModule, MatChipsModule, MatDialogModule],
   templateUrl: './rando-profile.component.html',
   styleUrls: ['./rando-profile.component.css']
 })
