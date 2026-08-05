@@ -1,7 +1,5 @@
 import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
-import './leaflet.css';
-import './leaflet-paths-fix.css';
 
 // Configurer Leaflet pour utiliser les images du dossier public
 L.Icon.Default.mergeOptions({
