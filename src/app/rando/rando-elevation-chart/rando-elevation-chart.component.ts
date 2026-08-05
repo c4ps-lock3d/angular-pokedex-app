@@ -1,24 +1,23 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts';
-import { ChartOptions, ChartData } from 'chart.js';
-import { Chart, CategoryScale, LinearScale, PointElement, LineElement, LineController, Title, Tooltip, Legend } from 'chart.js';
-
-Chart.register(CategoryScale, LinearScale, PointElement, LineElement, LineController, Title, Tooltip, Legend);
 
 @Component({
   selector: 'app-rando-elevation-chart',
   standalone: true,
   imports: [BaseChartDirective],
   templateUrl: './rando-elevation-chart.component.html',
-  styleUrls: ['./rando-elevation-chart.component.css']
+  styleUrls: ['./rando-elevation-chart.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RandoElevationChartComponent implements OnInit {
+export class RandoElevationChartComponent implements OnInit, OnChanges {
   @Input() trails: Array<{ id: number; ele: number; dis: number; lat: number; lon: number }> | undefined;
   @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+  
+  private chartsInitialized = false;
 
-  chartOptions: ChartOptions = {
+  chartOptions: any = {
+    responsive: true,
     maintainAspectRatio: false,
-    indexAxis: undefined,
     scales: {
       x: {
         type: 'linear',
@@ -76,14 +75,26 @@ export class RandoElevationChartComponent implements OnInit {
     },
   };
 
-  chartData: ChartData = {
+  chartData: any = {
     labels: [],
     datasets: []
   };
 
   ngOnInit() {
-    if (this.trails) {
+    if (this.trails && !this.chartsInitialized) {
       this.prepareChartData();
+      this.chartsInitialized = true;
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['trails'] && !changes['trails'].firstChange && this.trails) {
+      // Re-initialize chart if trails change
+      this.prepareChartData();
+    } else if (changes['trails'] && changes['trails'].firstChange && this.trails && !this.chartsInitialized) {
+      // Initialize on first change
+      this.prepareChartData();
+      this.chartsInitialized = true;
     }
   }
 
@@ -109,12 +120,12 @@ export class RandoElevationChartComponent implements OnInit {
         borderColor: '#90b6db',
         backgroundColor: 'rgba(144, 182, 219, 0.1)',
         fill: true,
-        pointStyle: 'circle',
+        pointStyle: 'circle' as any,
         pointRadius: 1,
         pointHoverRadius: 8,
         pointBackgroundColor: '#90b6db',
         tension: 0.3
-      }]
+      } as any]
     };
   }
 }

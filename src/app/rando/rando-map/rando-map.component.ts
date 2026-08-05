@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import * as L from 'leaflet';
 
 // Configurer Leaflet pour utiliser les images du dossier public
@@ -13,17 +13,37 @@ L.Icon.Default.mergeOptions({
   selector: 'app-rando-map',
   imports: [],
   templateUrl: './rando-map.component.html',
-  styleUrl: './rando-map.component.css'
+  styleUrl: './rando-map.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RandoMapComponent implements AfterViewInit, OnDestroy {
+export class RandoMapComponent implements AfterViewInit, OnDestroy, OnChanges {
   @Input() trails: Array<{ id: number; ele: number; dis: number; lat: number; lon: number }> | undefined;
   @ViewChild('mapContainer') mapContainer!: ElementRef;
 
   private map: L.Map | null = null;
+  private mapInitialized = false;
 
   ngAfterViewInit() {
-    if (this.trails && this.mapContainer) {
+    if (this.trails && this.mapContainer && !this.mapInitialized) {
       this.initializeMap();
+      this.mapInitialized = true;
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['trails'] && this.mapContainer && !changes['trails'].firstChange) {
+      // Re-initialize map if trails change after initial load
+      if (this.map) {
+        this.map.remove();
+        this.map = null;
+        this.mapInitialized = false;
+      }
+      this.initializeMap();
+      this.mapInitialized = true;
+    } else if (changes['trails'] && this.mapContainer && changes['trails'].firstChange && this.trails) {
+      // Initialize on first change if view is ready
+      this.initializeMap();
+      this.mapInitialized = true;
     }
   }
 
